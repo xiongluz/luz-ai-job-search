@@ -1,0 +1,23 @@
+{
+  "name": "guangqi-rhythm-site-test",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4174 --strictPort",
+    "dev:4173": "vite --host 127.0.0.1 --port 4173 --strictPort",
+    "build": "vite build",
+    "test:auth": "node --test tests/authRoutePolicy.test.js",
+    "test:auth:production": "vite build && node --test tests/productionAuthBundle.test.js",
+    "preview": "vite preview --host 127.0.0.1 --port 4174 --strictPort",
+    "preview:4173": "vite preview --host 127.0.0.1 --port 4173 --strictPort"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "gsap": "^3.12.5",
+    "qrcode": "^1.5.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "vite": "^6.4.2"
+  }
+}

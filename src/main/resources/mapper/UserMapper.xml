@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luz.aiagent.Mapper.UserMapper">
+
+    <insert id="favorite" parameterType="com.luz.aiagent.entity.PositionUser">
+        INSERT INTO position_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="positionUser.id != null">id,</if>
+            <if test="positionUser.userId != null">user_id,</if>
+            <if test="positionUser.positionId != null">position_id,</if>
+            <if test="positionUser.status != null">status,</if>
+            <if test="positionUser.favoriteTime != null">favorite_time,</if>
+            <if test="positionUser.updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="positionUser.id != null">#{positionUser.id},</if>
+            <if test="positionUser.userId != null">#{positionUser.userId},</if>
+            <if test="positionUser.positionId != null">#{positionUser.positionId},</if>
+            <if test="positionUser.status != null">#{positionUser.status},</if>
+            <if test="positionUser.favoriteTime != null">#{positionUser.favoriteTime},</if>
+            <if test="positionUser.updateTime != null">#{positionUser.updateTime},</if>
+        </trim>
+    </insert>
+
+    <select id="getFavoriteStatus" resultType="java.lang.Long" parameterType="java.lang.Long">
+        SELECT
+        pu.status
+        FROM position_user pu
+        <where>
+            <if test="positionId != '' and positionId != null">
+                AND pu.position_id = #{positionId}
+            </if>
+            <if test="userId != '' and userId != null">
+                AND pu.user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByUserPosition" resultType="com.luz.aiagent.entity.PositionUser">
+        SELECT
+        pu.*
+        FROM position_user pu
+        <where>
+            <if test="positionId != '' and positionId != null">
+                AND pu.position_id = #{positionId}
+            </if>
+            <if test="userId != '' and userId != null">
+                AND pu.user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

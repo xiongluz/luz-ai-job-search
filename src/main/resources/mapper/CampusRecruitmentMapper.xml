@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luz.aiagent.Mapper.CampusRecruitmentMapper">
+
+    <select id="findCampusRecruitment" resultType="com.luz.aiagent.entity.CampusRecruitment">
+        select cr.*
+        from campus_recruitment cr
+        <where>
+            <if test="recruitmentTargetFarewell != null and recruitmentTargetFarewell !=''">
+                AND cr.recruitment_target like CONCAT('%', #{recruitmentTargetFarewell}, '%')
+            </if>
+            <if test="position != null and position !=''">
+                AND cr.position like CONCAT('%', #{position}, '%')
+            </if>
+            <if test="city != null and city !=''">
+                AND cr.city like CONCAT('%', #{city}, '%')
+            </if>
+            <if test="recruitmentTargetEducationBackground != null and recruitmentTargetEducationBackground !=''">
+                AND cr.recruitment_target like CONCAT('%', #{recruitmentTargetEducationBackground}, '%')
+            </if>
+            <if test="businessType != null and businessType !=''">
+                AND cr.business_type = #{businessType}
+            </if>
+        </where>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(1) from campus_recruitment cr
+        <where>
+            <if test="recruitmentTargetFarewell != null and recruitmentTargetFarewell !=''">
+                AND cr.recruitment_target like CONCAT('%', #{recruitmentTargetFarewell}, '%')
+            </if>
+            <if test="position != null and position !=''">
+                AND cr.position like CONCAT('%', #{position}, '%')
+            </if>
+            <if test="city != null and city !=''">
+                AND cr.city like CONCAT('%', #{city}, '%')
+            </if>
+            <if test="recruitmentTargetEducationBackground != null and recruitmentTargetEducationBackground !=''">
+                AND cr.recruitment_target like CONCAT('%', #{recruitmentTargetEducationBackground}, '%')
+            </if>
+            <if test="businessType != null and businessType !=''">
+                AND cr.business_type = #{businessType}
+            </if>
+        </where>
+    </select>
+
+</mapper>
